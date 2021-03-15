@@ -28,10 +28,12 @@ import {TrainingProgramAddForm3Component} from './training-program-add-form3/tra
 import {TrainingProgramAddForm4Component} from './training-program-add-form4/training-program-add-form4.component';
 import {TrainingProgramAddForm5Component} from './training-program-add-form5/training-program-add-form5.component';
 import {DocxGeneratorTPComponent} from './docx-generator-TP/docx-generator-TP.component';
+import {DocxGeneratorScheduleComponent} from './doxc-generator-Schedule/docx-generator-schedule.component';
 
 const routes: Routes = [
   { path: 'docxGeneratorTP/:id', component:  DocxGeneratorTPComponent, canActivate: [AuthGuardService]},
   { path: 'docxGeneratorATP/:id', component:  DocxGeneratorATPComponent, canActivate: [AuthGuardService]},
+  { path: 'docxGeneratorSchedule/:id', component:  DocxGeneratorScheduleComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent},
   { path: 'additionalLiterature', component: AdditionalLiteratureComponent, canActivate: [AuthGuardService]},
   { path: 'regulation', component: RegulationComponent, canActivate: [AuthGuardService]},

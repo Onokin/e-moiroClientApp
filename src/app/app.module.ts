@@ -64,6 +64,7 @@ import { TrainingProgramAddForm4Component } from './training-program-add-form4/t
 import { TrainingProgramAddForm5Component } from './training-program-add-form5/training-program-add-form5.component';
 import {DocxGeneratorTPComponent} from './docx-generator-TP/docx-generator-TP.component';
 import { FilterPipe } from './filter.pipe';
+import {DocxGeneratorScheduleComponent} from './doxc-generator-Schedule/docx-generator-schedule.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { FilterPipe } from './filter.pipe';
     CurriculumTopicAddFormComponent,
     DocxGeneratorATPComponent,
     DocxGeneratorTPComponent,
+    DocxGeneratorScheduleComponent,
     CertificationTypeComponent,
     CertificationTypeEditComponent,
     FinalExaminationEditComponent,
