@@ -2,7 +2,7 @@ import {AlignmentType, convertMillimetersToTwip, Paragraph, TableCell, TableRow,
 
 export class ScheduleTeacher {
   public name: string;
-  private hours: number;
+  public hours: number;
   public audienceNumber: string;
 
 
@@ -10,5 +10,9 @@ export class ScheduleTeacher {
     this.name = name;
     this.hours = hours;
     this.audienceNumber = audienceNumber;
+  }
+
+  public calcRowSpan(): number {
+    return 0;
   }
 }

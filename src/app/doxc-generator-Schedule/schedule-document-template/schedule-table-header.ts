@@ -5,13 +5,13 @@ export class TableScheduleHeader {
 
   constructor() {// private occupationForms: any[]
     this.child.push(
-      this.generateTableCell('Дата', 12),
-      this.generateTableCell('День', 15.8),
-      this.generateTableCell('Время занятий', 26.6),
-      this.generateTableCell('Тема и вид занятий', 128.7),
-      this.generateTableCell('Преподаватель (Ф.И.О., ученая степень, звание)', 52.5),
-      this.generateTableCell('Кол-во часов', 20),
-      this.generateTableCell('№ ауд.', 28.6)
+      this.generateTableCell('Дата', 4.2),
+      this.generateTableCell('День', 5.5),
+      this.generateTableCell('Время занятий', 9.3),
+      this.generateTableCell('Тема и вид занятий', 45.2),
+      this.generateTableCell('Преподаватель (Ф.И.О., ученая степень, звание)', 18.8),
+      this.generateTableCell('Кол-во часов', 7),
+      this.generateTableCell('№ ауд.', 10)
     );
   }
 
@@ -21,8 +21,8 @@ export class TableScheduleHeader {
       // columnSpan: this.occupationForms.length,
       verticalAlign: VerticalAlign.CENTER,
       width: {
-        size: convertMillimetersToTwip(size),
-        type: WidthType.DXA
+        size,
+        type: WidthType.PERCENTAGE
       }
     });
   }

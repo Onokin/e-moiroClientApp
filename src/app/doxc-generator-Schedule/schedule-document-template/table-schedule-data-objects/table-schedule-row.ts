@@ -2,6 +2,7 @@ import {AlignmentType, convertMillimetersToTwip, Paragraph, TableCell, TableRow,
 import {ScheduleTheme} from './table-schedule-theme';
 
 export class ScheduleDataRow {
+
   public date: Date;
   public hours: string;
   public themes: ScheduleTheme[];
@@ -12,7 +13,7 @@ export class ScheduleDataRow {
     this.hours = hours;
   }
 
-  public getDayOfTheWeek(day: Date): string {
+  public static getDayOfTheWeek(day: Date): string {
     switch (day.getDay()) {
       case 1:
         return 'Понедельник';
@@ -37,7 +38,7 @@ export class ScheduleDataRow {
         break;
     }
   }
-  public getDayOfTheWeekBlR(day: Date): string{
+  public static getDayOfTheWeekBlR(day: Date): string{
       switch (day.getDay()) {
         case 1:
           return 'Панядзелак';
@@ -61,5 +62,13 @@ export class ScheduleDataRow {
           return 'Нядзеля';
           break;
       }
+  }
+
+  public calcRowSpan(): number {
+    let rs;
+    this.themes.forEach(t => {
+      rs += t.calcRowSpan();
+    });
+    return this.themes.length + rs;
   }
 }

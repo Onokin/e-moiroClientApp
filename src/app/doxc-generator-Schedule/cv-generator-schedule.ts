@@ -1,4 +1,13 @@
-import {convertMillimetersToTwip, Document, Header, PageNumberFormat, PageOrientation, Paragraph} from 'docx';
+import {
+  AlignmentType,
+  convertMillimetersToTwip,
+  Document,
+  Header,
+  PageNumberFormat,
+  PageOrientation,
+  Paragraph,
+  TextRun
+} from 'docx';
 import {TrainingProgram} from '../models/TrainingProgram';
 import {TrainingProgramCurriculumSection} from '../models/TrainingProgramCurriculumSection';
 import {CurriculumTopicTrainingProgram} from '../models/СurriculumTopicTrainingProgram';
@@ -18,8 +27,6 @@ import {DocxGeneratorScheduleTemplate} from './schedule-document-template/schedu
 import {TableScheduleGenerator} from './schedule-document-template/schedule-table-generator';
 
 export class DocumentCreatorSchedule {
-
-  teacher: number;
   docxGeneratorDataTemplate: DocxGeneratorDataTemplate = new DocxGeneratorDataTemplate(28);
   docxGeneratorScheduleTemplate: DocxGeneratorScheduleTemplate = new DocxGeneratorScheduleTemplate(24);
   tableScheduleGenerator: TableScheduleGenerator = new TableScheduleGenerator();

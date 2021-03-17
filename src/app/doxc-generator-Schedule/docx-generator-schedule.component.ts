@@ -28,6 +28,7 @@ import {OccupationForm} from '../models/OccupationForm';
 import {DepartmentService} from '../services/department.service';
 import {Department} from '../models/Department';
 import { saveAs } from 'file-saver';
+import DateTimeFormat = Intl.DateTimeFormat;
 
 @Component({
   selector: 'app-docx-generator',
@@ -86,9 +87,12 @@ export class DocxGeneratorScheduleComponent implements OnInit{
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
-    this.curriculumTopicsList = [];
-    this.id = this.route.snapshot.params.id;
-    this.loadTrainingProgram();
+    // this.curriculumTopicsList = [];
+    // this.id = this.route.snapshot.params.id;
+    // this.loadTrainingProgram();
+    let date = new Date();
+    console.log(date.toLocaleDateString());
+    this.getDocument();
   }
 
   // LOAD
