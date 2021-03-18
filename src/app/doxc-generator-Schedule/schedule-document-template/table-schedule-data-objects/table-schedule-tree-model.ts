@@ -3,23 +3,25 @@ import {ScheduleTheme} from './table-schedule-theme';
 
 export class ScheduleRowTree {
 
-  public fields: any[];
-  public subs: ScheduleRowTree[];
+  constructor(private fields: string[], private subs: any[]) {
 
+  }
 
-  constructor(fields: any[], subs: any[]) {
-    this.fields = fields;
-    this.subs = subs;
+ public get getFields(): string[]{
+    return this.fields;
+ }
+  public get getSubs(): any[]{
+    return this.subs;
   }
 
   public calcRowSpan(): number {
-    if (this.subs.length === 0) {
+    if (this.subs === undefined) {
       return 1;
     }
-    let rs;
-    this.subs.forEach(t => {
-      rs += t.calcRowSpan();
-    });
+    const rs = 0;
+    // this.subs.forEach(sub => {
+    //   rs += sub.calcRowSpan();
+    // });
     return rs;
   }
 }

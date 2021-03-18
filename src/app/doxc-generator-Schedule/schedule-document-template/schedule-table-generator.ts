@@ -39,26 +39,95 @@ export class TableScheduleGenerator {
       ]),
     ]);
 
+    const tree = new ScheduleRowTree([
+          'Date',
+          'Day',
+      ],
+      [
+        {
+          subs: [
+            new ScheduleRowTree([
+                  'theme1'
+              ],
+              [
+                {
+                  subs: [
+                    new ScheduleRowTree([
+                            'teacher1',
+                            'f1',
+                            'f1',
+                            'f1'
+                      ],
+                      [{subs: []}]
+                    ),
+                    new ScheduleRowTree([
+                            'teacher2',
+                            'f2',
+                            'f2',
+                            'f2'
+                      ],
+                      [{subs: []}]
+                    ),
+                  ]
+                }
+              ]
+            ),
+            new ScheduleRowTree([
+                    'theme2'
+              ],
+              [
+                {
+                  subs: [
+                    new ScheduleRowTree([
+                            'teacher3',
+                            'f3',
+                            'f3',
+                            'f3'
+                      ],
+                      [{subs: []}]
+                    ),
+                    new ScheduleRowTree([
+                            'teacher4',
+                            'f4',
+                            'f4',
+                            'f4'
+                      ],
+                      [{subs: []}]
+                    ),
+                  ]
+                }
+              ]
+            ),
+          ]
+      }
+      ]
+    );
+    this.generateRows(tree);
     this.scheduleRows.push(a);
-    this.generateTableRow();
+    // this.generateTableRow();
   }
 
 
-  public generateRows(aux: ScheduleRowTree, row: TableRow, isSub: boolean): boolean{
-    if (row === undefined)
-    {
+  public generateRows(rowTree: ScheduleRowTree, isSub: boolean = false, row?: TableRow): boolean{
+    console.log(rowTree);
+    if (row === undefined) {
       row = new TableRow({
-        children: [
-          this.pushFieldsArr(aux.fields, row, aux.calcRowSpan()),
-        ],
-    });
+        children: this.pushFieldsArr(rowTree.getFields, rowTree.calcRowSpan()),
+      });
+
+    }
+    else {
+      this.pushFields(rowTree.getFields, row, rowTree.calcRowSpan());
     }
 
-    this.pushFields(aux.fields, row, aux.calcRowSpan());
-
-    if (aux.subs.length > 0) {
-        aux.subs.forEach(sub => {
-          this.generateRows(sub, row, isSub);
+    if (rowTree.getSubs.length > 0) {
+        rowTree.getSubs.forEach(sub => {
+          if (isSub) {
+            this.generateRows(sub, isSub);
+          }
+          else {
+            this.generateRows(sub, isSub, row);
+          }
         });
         isSub = false;
     }
@@ -70,7 +139,7 @@ export class TableScheduleGenerator {
   }
 
   // tslint:disable-next-line:typedef
-  public pushFields(fields: any[], row: TableRow, rowSpan: number){
+  public pushFields(fields: string[], row: TableRow, rowSpan: number){
     fields.forEach(field => {
       row.Children.push(
         this.generateTableCell(field, this.size, rowSpan),
@@ -78,13 +147,15 @@ export class TableScheduleGenerator {
     });
   }
 
-  public pushFieldsArr(fields: any[], row: TableRow, rowSpan: number): any[]{
+  public pushFieldsArr(fields: string[], rowSpan: number): any[]{
     const fl: any = [];
     fields.forEach(field => {
       fl.push(
         this.generateTableCell(field, this.size, rowSpan)
       );
+      console.log(field);
     });
+    console.log(fl);
     return fl;
   }
 
@@ -101,8 +172,10 @@ export class TableScheduleGenerator {
           this.generateTableCell(scheduleRow.hours, this.size, scheduleRow.calcRowSpan()),
           this.generateTableCell(scheduleRow.themes[themeIndex].name, this.size, scheduleRow.calcRowSpan()),
           this.generateTableCell(scheduleRow.themes[themeIndex].teachers[teacherIndex].name, this.size, scheduleRow.calcRowSpan()),
-          this.generateTableCell(scheduleRow.themes[themeIndex].teachers[teacherIndex].hours.toString(), this.size, scheduleRow.calcRowSpan()),
-          this.generateTableCell(scheduleRow.themes[themeIndex].teachers[teacherIndex].audienceNumber, this.size, scheduleRow.calcRowSpan()),
+          this.generateTableCell(scheduleRow.themes[themeIndex].teachers[teacherIndex].hours.toString(),
+            this.size, scheduleRow.calcRowSpan()),
+          this.generateTableCell(scheduleRow.themes[themeIndex].teachers[teacherIndex].audienceNumber,
+            this.size, scheduleRow.calcRowSpan()),
         ]
       });
       themeIndex++;
